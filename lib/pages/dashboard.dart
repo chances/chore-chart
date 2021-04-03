@@ -51,8 +51,6 @@ class _DashboardPageState extends State<DashboardPage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
       ),
     );
   }

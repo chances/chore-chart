@@ -28,8 +28,15 @@ class ChoresApp extends StatelessWidget {
         buttonColor: ChoresTheme.primary,
         buttonTheme: ButtonThemeData(buttonColor: ChoresTheme.primary),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-          foregroundColor: Colors.black,
-          backgroundColor: ChoresTheme.primary,
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.blue,
+        ),
+        tooltipTheme: TooltipThemeData(
+          decoration: BoxDecoration(
+            color: Colors.grey[900],
+            borderRadius: BorderRadius.circular(4),
+          ),
+          textStyle: TextStyle(color: Colors.white),
         ),
         textTheme: Typography.blackMountainView,
       ),
