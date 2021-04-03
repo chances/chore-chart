@@ -1,6 +1,6 @@
 {
-    "name": "chore_chart",
-    "short_name": "chore_chart",
+    "name": "Chore Chart",
+    "short_name": "Chores",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

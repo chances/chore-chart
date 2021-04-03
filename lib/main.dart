@@ -22,7 +22,7 @@ class ChoresApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Chore Chart',
       theme: ThemeData(
         primaryColor: ChoresTheme.primary,
         buttonColor: ChoresTheme.primary,
