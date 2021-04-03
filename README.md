@@ -15,6 +15,6 @@ Running on [Flutter Pi](https://github.com/ardera/flutter-pi) with the [Raspberr
 
 ## License
 
-[MIT License](http://opensource.org/licenses/MIT)
+[BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause)
 
 Copyright &copy; 2021 Chance Snow. All rights reserved.
