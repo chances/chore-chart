@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.chancesnow.chores">
+    package="llc.snow.chores">
    <application
         android:label="chore_chart"
         android:icon="@mipmap/ic_launcher">

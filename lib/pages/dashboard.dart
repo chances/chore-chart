@@ -5,7 +5,7 @@ import 'package:chore_chart/theme.dart';
 import 'package:chore_chart/widgets/logo.dart';
 
 class DashboardPage extends StatefulWidget {
-  DashboardPage({Key key}) : super(key: key);
+  DashboardPage({Key? key}) : super(key: key);
 
   @override
   _DashboardPageState createState() => _DashboardPageState();
