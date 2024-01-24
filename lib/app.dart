@@ -2,15 +2,15 @@ import 'package:flutter/widgets.dart';
 
 class AppConfig extends InheritedWidget {
   AppConfig({
-    Key key,
-    @required Widget child,
-    @required this.media,
+    required Widget child,
+    required this.media,
+    Key? key,
   }) : super(key: key, child: child);
 
   final MediaQueryData media;
 
   static AppConfig of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<AppConfig>();
+      context.dependOnInheritedWidgetOfExactType<AppConfig>()!;
 
   // TODO bool get isIos => true || false;
 

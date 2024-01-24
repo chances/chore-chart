@@ -13,7 +13,7 @@ void main() {
 }
 
 class ChoresApp extends StatelessWidget {
-  ChoresApp({Key key}) : super(key: key) {
+  ChoresApp({Key? key}) : super(key: key) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
@@ -25,7 +25,6 @@ class ChoresApp extends StatelessWidget {
       title: 'Chore Chart',
       theme: ThemeData(
         primaryColor: ChoresTheme.primary,
-        buttonColor: ChoresTheme.primary,
         buttonTheme: ButtonThemeData(buttonColor: ChoresTheme.primary),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           foregroundColor: Colors.white,
@@ -44,7 +43,8 @@ class ChoresApp extends StatelessWidget {
       routes: {
         '/dashboard': (context) => DashboardPage(),
       },
-      builder: (context, child) => AppConfig(media: MediaQuery.of(context), child: child),
+      builder: (context, child) =>
+          AppConfig(media: MediaQuery.of(context), child: child!),
     );
   }
 }

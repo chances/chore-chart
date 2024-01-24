@@ -1,0 +1,14 @@
+{
+  "actions" : {
+    "clean" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\nexport PATH=\"$PATH:$HOME\/bin\/flutter\/bin\"\nflutter clean\n"
+    },
+    "run" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\nexport PATH=\"$PATH:$HOME\/bin\/flutter\/bin\"\nflutter devices\nflutter run -d web-server\n"
+    }
+  },
+  "identifier" : "55D49681-9BA3-4490-8BA1-418DA0F7F0E9",
+  "openLogOnRun" : "fail"
+}
