@@ -42,7 +42,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 child: Logo(config.vw(0.3, fromLogicalSize: true)),
               ),
               Text('You have pushed the button this many times:'),
-              Text('$_counter', style: Theme.of(context).textTheme.headline4),
+              Text('$_counter', style: Theme.of(context).textTheme.headlineSmall),
             ],
           ),
         ),
