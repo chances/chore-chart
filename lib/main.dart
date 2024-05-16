@@ -24,27 +24,35 @@ class ChoresApp extends StatelessWidget {
     return MaterialApp(
       title: 'Chore Chart',
       theme: ThemeData(
+        brightness: Brightness.dark,
         primaryColor: ChoresTheme.primary,
-        buttonTheme: ButtonThemeData(buttonColor: ChoresTheme.primary),
+        scaffoldBackgroundColor: ChoresTheme.dark.primaryBg,
+        canvasColor: ChoresTheme.dark.secondaryBg,
+        cardColor: ChoresTheme.dark.secondaryBg,
+        dialogBackgroundColor: ChoresTheme.dark.primaryBg,
+        dividerColor: ChoresTheme.dark.line,
+        buttonTheme: ButtonThemeData(buttonColor: ChoresTheme.highlight),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-          foregroundColor: Colors.white,
-          backgroundColor: Colors.blue,
+          foregroundColor: ChoresTheme.dark.primaryButtonText,
+          backgroundColor: ChoresTheme.orangePeel,
+          shape: CircleBorder(),
         ),
         tooltipTheme: TooltipThemeData(
           decoration: BoxDecoration(
-            color: Colors.grey[900],
+            color: ChoresTheme.dark.secondaryBg,
             borderRadius: BorderRadius.circular(4),
           ),
-          textStyle: TextStyle(color: Colors.white),
+          textStyle: TextStyle(color: ChoresTheme.dark.primaryText),
         ),
-        textTheme: Typography.blackMountainView,
+        textTheme: Typography.whiteMountainView,
       ),
       initialRoute: '/dashboard',
       routes: {
         '/dashboard': (context) => DashboardPage(),
       },
-      builder: (context, child) =>
-          AppConfig(media: MediaQuery.of(context), child: child!),
+      builder: (context, child) => AppConfig(
+        media: MediaQuery.of(context), child: child!,
+      ),
     );
   }
 }

@@ -24,10 +24,10 @@ class _DashboardPageState extends State<DashboardPage> {
 
     return Scaffold(
       body: Container(
-        // color: ChoresTheme.homeBg,
+        // color: ChoresTheme.biceBlue,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [ChoresTheme.homeBg, ChoresTheme.homeBgB],
+            colors: [ChoresTheme.biceBlue, ChoresTheme.amethyst],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             stops: [0, 0.9],
