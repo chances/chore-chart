@@ -3,9 +3,9 @@
   "short_name": "Chores",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#0175C2",
-  "theme_color": "#0175C2",
-  "description": "Manage your household's collection of chores.",
+  "background_color": "#000",
+  "theme_color": "#FFA726",
+  "description": "Manage your household chores.",
   "orientation": "portrait-primary",
   "prefer_related_applications": false,
   "icons": [
