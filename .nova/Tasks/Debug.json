@@ -6,9 +6,8 @@
     },
     "run" : {
       "enabled" : true,
-      "script" : "#!\/bin\/sh\nexport PATH=\"$PATH:$HOME\/bin\/flutter\/bin\"\nflutter devices\nflutter run --no-hot\n"
+      "script" : "#!\/bin\/sh\nexport FLUTTER_ROOT=\"$(asdf where flutter)\"\nexport CXX=\/usr\/lib\/llvm-6.0\/bin\/clang\nexport PATH=\"$PATH:$FLUTTER_ROOT\/bin\"\nflutter devices\nflutter run --no-hot\n"
     }
   },
-  "identifier" : "65904E6F-1364-49AD-84C4-32BCF6E8C3D7",
   "openLogOnRun" : "fail"
 }

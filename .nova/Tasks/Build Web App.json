@@ -1,0 +1,9 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\nexport FLUTTER_ROOT=\"$(asdf where flutter)\"\nexport CXX=\/usr\/lib\/llvm-6.0\/bin\/clang\nexport PATH=\"$PATH:$FLUTTER_ROOT\/bin\"\nflutter build web\n"
+    }
+  },
+  "openLogOnRun" : "fail"
+}
