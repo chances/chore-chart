@@ -1,5 +1,5 @@
+import 'package:chore_chart/models.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ChoreListItemWidget extends StatefulWidget {
   const ChoreListItemWidget({
@@ -7,7 +7,7 @@ class ChoreListItemWidget extends StatefulWidget {
     required this.chore,
   });
 
-  final ChoresRow? chore;
+  final Chore? chore;
 
   @override
   State<ChoreListItemWidget> createState() => _ChoreListItemWidgetState();
@@ -29,49 +29,30 @@ class _ChoreListItemWidgetState extends State<ChoreListItemWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AlignedTooltip(
-            content: Padding(
-              padding: EdgeInsets.all(4.0),
-              child: Text(
-                'Toggle ${widget.chore?.chore}',
-                style: Theme.of(context).bodyLarge.override(
-                      fontFamily: 'Readex Pro',
-                      letterSpacing: 0.0,
-                    ),
-              ),
-            ),
-            offset: 4.0,
-            preferredDirection: AxisDirection.down,
-            borderRadius: BorderRadius.circular(8.0),
-            backgroundColor: Theme.of(context).secondaryBackground,
-            elevation: 4.0,
-            tailBaseWidth: 24.0,
-            tailLength: 12.0,
-            waitDuration: Duration(milliseconds: 100),
-            showDuration: Duration(milliseconds: 1500),
-            triggerMode: TooltipTriggerMode.tap,
-            child: Theme(
+          Tooltip(
+            child:
+                // FIXME: Update the app's tooltip theme and extract this into a ThemedTooltip stateless widget
+                Theme(
               data: ThemeData(
-                checkboxTheme: CheckboxThemeData(
-                  visualDensity: VisualDensity.compact,
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4.0),
+                  checkboxTheme: CheckboxThemeData(
+                    visualDensity: VisualDensity.compact,
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4.0),
+                    ),
                   ),
-                ),
-                unselectedWidgetColor:
-                    Theme.of(context).secondaryText,
-              ),
+                  unselectedWidgetColor:
+                      Theme.of(context).tooltipTheme.textStyle?.color),
               child: Checkbox(
-                value: _model.checkboxValue ??= widget.chore!.completed,
-                onChanged: (newValue) async {
-                  setState(() => _model.checkboxValue = newValue!);
+                value: widget.chore!.completed,
+                onChanged: (isChecked) async {
+                  setState(() => widget.chore!.completed = isChecked!);
                 },
                 side: BorderSide(
                   width: 2,
-                  color: Theme.of(context).secondaryText,
+                  color: Theme.of(context).dividerColor,
                 ),
-                activeColor: Theme.of(context).secondary,
+                activeColor: Theme.of(context).indicatorColor,
                 checkColor: Colors.black,
               ),
             ),
@@ -83,21 +64,27 @@ class _ChoreListItemWidgetState extends State<ChoreListItemWidget> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.chore?.chore ?? 'Unknown Chore'),
-                    style: Theme.of(context).bodyLarge.override(
-                          fontFamily: 'Readex Pro',
-                          letterSpacing: 0.0,
-                        ),
+                  Text(
+                    widget.chore?.chore ?? 'Unknown Chore',
+                    style: Theme.of(context)
+                        .typography
+                        .black
+                        .bodyLarge
+                        ?.apply(fontFamily: 'Readex Pro')
+                        .copyWith(letterSpacing: 0.0),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                     child: SelectionArea(
-                        child: Text(widget.chore?.notes ?? 'Describe this chore.'),
+                        child: Text(
+                      widget.chore?.notes ?? 'Describe this chore.',
                       maxLines: 1,
-                      style: Theme.of(context).labelSmall.override(
-                            fontFamily: 'Readex Pro',
-                            letterSpacing: 0.0,
-                          ),
+                      style: Theme.of(context)
+                          .typography
+                          .black
+                          .labelSmall
+                          ?.apply(fontFamily: 'Readex Pro')
+                          .copyWith(letterSpacing: 0.0),
                     )),
                   ),
                 ],
@@ -108,7 +95,7 @@ class _ChoreListItemWidgetState extends State<ChoreListItemWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
             child: Icon(
               Icons.chevron_right_rounded,
-              color: Theme.of(context).secondaryText,
+              color: Theme.of(context).iconTheme.color,
               size: 24.0,
             ),
           ),

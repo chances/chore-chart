@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:chore_chart/app.dart';
 import 'package:chore_chart/pages/dashboard.dart';
+import 'package:chore_chart/pages/welcome.dart';
 
 import 'theme.dart';
 
-void main() {
+void main() async {
   // TODO: SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load();
+  await Supabase.initialize(
+    url: dotenv.get('SUPABASE_URL'),
+    anonKey: dotenv.get('SUPABASE_ANON_KEY'),
+  );
 
   runApp(ChoresApp());
 }
@@ -44,14 +54,27 @@ class ChoresApp extends StatelessWidget {
           ),
           textStyle: TextStyle(color: ChoresTheme.dark.primaryText),
         ),
-        textTheme: Typography.whiteMountainView,
+        snackBarTheme: SnackBarThemeData(
+          backgroundColor: ChoresTheme.dark.secondaryBg,
+          contentTextStyle: TextStyle(
+            color: ChoresTheme.dark.primaryText
+          ),
+          actionBackgroundColor: ChoresTheme.dark.primaryBg,
+          actionTextColor: ChoresTheme.dark.primaryButtonText
+        ),
+        textTheme: Typography.whiteMountainView.apply(
+          fontFamily: 'Readex Pro',
+        ),
       ),
-      initialRoute: '/dashboard',
+      // TODO: initialRoute: isLoggedIn ? '/dashboard' : '/welcome',
+      initialRoute: '/welcome',
       routes: {
+        '/welcome': (context) => WelcomePage(),
         '/dashboard': (context) => DashboardPage(),
       },
       builder: (context, child) => AppConfig(
-        media: MediaQuery.of(context), child: child!,
+        media: MediaQuery.of(context),
+        child: child!,
       ),
     );
   }
