@@ -1,3 +1,7 @@
 {
-  "sciencefidelity.dart.config.formatDocumentOnSave" : "false"
+  "sciencefidelity.dart.config.enableAnalyzer" : "true",
+  "sciencefidelity.dart.config.formatDocumentOnSave" : "false",
+  "workspace.art_style" : 1,
+  "workspace.color" : 9,
+  "workspace.name" : "Chore Chart"
 }
