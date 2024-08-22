@@ -47,11 +47,10 @@ class ChoresTheme with ChangeNotifier {
 
   ThemeData get theme => _isDark ? dark : light;
 
-  TextStyle get hyperlink =>
-      theme.typography.white.bodyMedium!.apply(color: ChoresTheme.primary).copyWith(
-            letterSpacing: 0.0,
-            fontWeight: FontWeight.w600,
-          );
+  TextStyle get hyperlink => theme.typography.white.bodyMedium!.apply(color: skyBlue).copyWith(
+        letterSpacing: 0.0,
+        fontWeight: FontWeight.w600,
+      );
 
   void toggleBrightness() {
     _isDark = !_isDark;
@@ -72,13 +71,13 @@ class ChoresTheme with ChangeNotifier {
       textTheme: ButtonTextTheme.primary,
     ),
     filledButtonTheme: FilledButtonThemeData(
-      // style: ButtonStyle(
-      //     shape: WidgetStatePropertyAll(OutlinedBorder(
-      //         side: BorderSide(
-      //   color: alternate,
-      //   width: 2.0,
-      // )))),
-    ),
+        // style: ButtonStyle(
+        //     shape: WidgetStatePropertyAll(OutlinedBorder(
+        //         side: BorderSide(
+        //   color: alternate,
+        //   width: 2.0,
+        // )))),
+        ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       foregroundColor: ChoresTheme.primaryButtonText,
       backgroundColor: ChoresTheme.orangePeel,
