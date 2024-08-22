@@ -9,9 +9,12 @@ import 'package:supabase/supabase.dart';
 part 'models.g.dart';
 
 extension DatabaseClient on SupabaseClient {
-  SupabaseQueryBuilder get frequencies => from('frequencies');
-  SupabaseQueryBuilder get chores => from('chores');
-  SupabaseQueryBuilder get users => from('users');
+  SupabaseStreamFilterBuilder get frequencies =>
+      from(FrequencyDataStore.table_name).stream(primaryKey: [FrequencyDataStore.id_column]);
+  SupabaseStreamFilterBuilder get chores =>
+      from(ChoreDataStore.table_name).stream(primaryKey: [ChoreDataStore.id_column]);
+  SupabaseStreamFilterBuilder get users =>
+      from(UserDataStore.table_name).stream(primaryKey: [UserDataStore.id_column]);
 }
 
 abstract class Model {
@@ -20,14 +23,11 @@ abstract class Model {
   const Model(this.columns);
 
   static Model fromJson<T>(Map<String, dynamic> data) {
-    if (FrequencyDataStore._columns
-        .every((element) => data.keys.contains(element)))
+    if (FrequencyDataStore._columns.every((element) => data.keys.contains(element)))
       return FrequencyDataStore.fromJson(data) as Model;
-    else if (ChoreDataStore._columns
-        .every((element) => data.keys.contains(element)))
+    else if (ChoreDataStore._columns.every((element) => data.keys.contains(element)))
       return ChoreDataStore.fromJson(data) as Model;
-    else if (UserDataStore._columns
-        .every((element) => data.keys.contains(element)))
+    else if (UserDataStore._columns.every((element) => data.keys.contains(element)))
       return UserDataStore.fromJson(data) as Model;
     else
       throw new UnsupportedError("The given JSON is unsupported.");
@@ -106,18 +106,13 @@ abstract class FrequencyDataStore extends Model with Store {
 
   factory FrequencyDataStore.fromJson(Map<String, dynamic> json) {
     return Frequency(
-      id: json['id'] != null
-          ? BigInt.tryParse(json['id'].toString()) as BigInt
-          : BigInt.from(0),
+      id: json['id'] != null ? BigInt.tryParse(json['id'].toString()) as BigInt : BigInt.from(0),
       created_at: json['created_at'] != null
           ? DateTime.tryParse(json['created_at'].toString()) as DateTime
           : DateTime.fromMillisecondsSinceEpoch(0),
       title: json['title'] != null ? json['title'].toString() : '',
-      frequency: json['frequency'] != null
-          ? double.tryParse(json['frequency'].toString())
-          : 0.0,
-      description:
-          json['description'] != null ? json['description'].toString() : '',
+      frequency: json['frequency'] != null ? double.tryParse(json['frequency'].toString()) : 0.0,
+      description: json['description'] != null ? json['description'].toString() : '',
     );
   }
 }
@@ -237,24 +232,20 @@ abstract class ChoreDataStore extends Model with Store {
 
   factory ChoreDataStore.fromJson(Map<String, dynamic> json) {
     return Chore(
-      id: json['id'] != null
-          ? BigInt.tryParse(json['id'].toString()) as BigInt
-          : BigInt.from(0),
+      id: json['id'] != null ? BigInt.tryParse(json['id'].toString()) as BigInt : BigInt.from(0),
       created_at: json['created_at'] != null
           ? DateTime.tryParse(json['created_at'].toString()) as DateTime
           : DateTime.fromMillisecondsSinceEpoch(0),
       updated_at: json['updated_at'] != null
           ? DateTime.tryParse(json['updated_at'].toString()) as DateTime
           : DateTime.fromMillisecondsSinceEpoch(0),
-      created_by:
-          json['created_by'] != null ? json['created_by'].toString() : '',
+      created_by: json['created_by'] != null ? json['created_by'].toString() : '',
       chore: json['chore'] != null ? json['chore'].toString() : '',
       frequency: json['frequency'] != null
           ? BigInt.tryParse(json['frequency'].toString()) as BigInt
           : BigInt.from(0),
       completed: json['completed'] != null ? json['completed'] as bool : false,
-      completed_by:
-          json['completed_by'] != null ? json['completed_by'].toString() : '',
+      completed_by: json['completed_by'] != null ? json['completed_by'].toString() : '',
       assignee: json['assignee'] != null ? json['assignee'].toString() : '',
       notes: json['notes'] != null ? json['notes'].toString() : '',
     );

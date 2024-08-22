@@ -20,7 +20,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    final config = AppConfig.of(context);
+    final config = App.of(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -30,11 +30,11 @@ class _DashboardPageState extends State<DashboardPage> {
           'Monday January 1, 1900',
           // TODO: formatDate(_model.day!),
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            fontFamily: 'Outfit',
-            color: Colors.white,
-            fontSize: 22.0,
-            letterSpacing: 0.0,
-          ),
+                fontFamily: 'Outfit',
+                color: Colors.white,
+                fontSize: 22.0,
+                letterSpacing: 0.0,
+              ),
         ),
         actions: [
           Tooltip(
@@ -94,7 +94,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 child: Logo(config.vw(0.3, fromLogicalSize: true)),
               ),
               Text('You have pushed the button this many times:'),
-              Text('$_counter', style: Theme.of(context).textTheme.headlineSmall),
+              Text('$_counter',
+                  style: Theme.of(context).textTheme.headlineSmall),
             ],
           ),
         ),

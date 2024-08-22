@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-class AppConfig extends InheritedWidget {
-  AppConfig({
+class App extends InheritedWidget {
+  App({
     required Widget child,
     required this.media,
     Key? key,
@@ -9,8 +9,8 @@ class AppConfig extends InheritedWidget {
 
   final MediaQueryData media;
 
-  static AppConfig of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<AppConfig>()!;
+  static App of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<App>()!;
 
   // TODO bool get isIos => true || false;
 
@@ -19,7 +19,7 @@ class AppConfig extends InheritedWidget {
   double get logicalHeight => isPortrait ? media.size.height : media.size.width;
 
   @override
-  bool updateShouldNotify(AppConfig oldWidget) => true;
+  bool updateShouldNotify(App oldWidget) => true;
 
   double vw(double percentage, {bool fromLogicalSize = false}) {
     assert(percentage >= 0.0 && percentage <= 1.0);
