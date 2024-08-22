@@ -225,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Container(
                                     height: 1.0,
                                     decoration: BoxDecoration(
-                                      color: Provider.of<AppTheme>(context).secondaryText,
+                                      color: ChoresTheme.secondaryText,
                                     ),
                                   ),
                                 ),
@@ -248,7 +248,7 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Container(
                                     height: 1.0,
                                     decoration: BoxDecoration(
-                                      color: Provider.of<AppTheme>(context).secondaryText,
+                                      color: ChoresTheme.secondaryText,
                                     ),
                                   ),
                                 ),
