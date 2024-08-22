@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Chores",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "Chores (Profile)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "openDevTools": "performance"
+    },
+    {
+      "name": "Chores (Release)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    }
+  ]
+}
