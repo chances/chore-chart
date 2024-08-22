@@ -48,6 +48,45 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final config = App.of(context);
 
+    var orDivider = Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: Opacity(
+                                opacity: 0.75,
+                                child: Container(
+                                  height: 1.0,
+                                  decoration: BoxDecoration(
+                                    color: ChoresTheme.secondaryText,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                              child: Text(
+                                'or',
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context)
+                                    .typography
+                                    .white
+                                    .labelLarge
+                                    ?.copyWith(letterSpacing: 0.0),
+                              ),
+                            ),
+                            Expanded(
+                              child: Opacity(
+                                opacity: 0.75,
+                                child: Container(
+                                  height: 1.0,
+                                  decoration: BoxDecoration(
+                                    color: ChoresTheme.secondaryText,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
     return Scaffold(
       body: Container(
         // FIXME: color: ChoresTheme.biceBlue,
@@ -185,68 +224,8 @@ class _LoginPageState extends State<LoginPage> {
                             context.pushReplacementNamed('/');
                           },
                           child: Text('Log In'),
-                          // options: FFButtonOptions(
-                          //   width: double.infinity,
-                          //   height: 44.0,
-                          //   padding: EdgeInsetsDirectional.fromSTEB(
-                          //       0.0, 0.0, 0.0, 0.0),
-                          //   iconPadding: EdgeInsetsDirectional.fromSTEB(
-                          //       0.0, 0.0, 0.0, 0.0),
-                          //   color: Theme.of(context).primary,
-                          //   textStyle: Theme.of(context)
-                          //       .typography
-                          //       .white
-                          //       .titleSmall
-                          //       ?.apply(color: Colors.white)
-                          //       .copyWith(letterSpacing: 0.0),
-                          //   elevation: 3.0,
-                          //   borderSide: BorderSide(
-                          //     color: Colors.transparent,
-                          //     width: 1.0,
-                          //   ),
-                          //   borderRadius: BorderRadius.circular(12.0),
-                          // ),
                         ),
-                        if (false)
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: Opacity(
-                                  opacity: 0.75,
-                                  child: Container(
-                                    height: 1.0,
-                                    decoration: BoxDecoration(
-                                      color: ChoresTheme.secondaryText,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                                child: Text(
-                                  'or',
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .typography
-                                      .white
-                                      .labelLarge
-                                      ?.copyWith(letterSpacing: 0.0),
-                                ),
-                              ),
-                              Expanded(
-                                child: Opacity(
-                                  opacity: 0.75,
-                                  child: Container(
-                                    height: 1.0,
-                                    decoration: BoxDecoration(
-                                      color: ChoresTheme.secondaryText,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                        orDivider,
                         // See https://console.cloud.google.com/apis/credentials?authuser=1&project=chore-chart-fo3w11
                         FilledButton(
                           onPressed: () async {
@@ -269,30 +248,6 @@ class _LoginPageState extends State<LoginPage> {
                           // FIXME: icon: FaIcon(
                           //   FontAwesomeIcons.google,
                           //   size: 20.0,
-                          // ),
-                          // options: FFButtonOptions(
-                          //   width: double.infinity,
-                          //   height: 44.0,
-                          //   padding: EdgeInsetsDirectional.fromSTEB(
-                          //       0.0, 0.0, 0.0, 0.0),
-                          //   iconPadding: EdgeInsetsDirectional.fromSTEB(
-                          //       0.0, 0.0, 0.0, 0.0),
-                          //   color: Theme.of(context).secondaryBackground,
-                          //   textStyle: Theme.of(context)
-                          //       .typography
-                          //       .white
-                          //       .titleSmall
-                          //       ?.apply(
-                          //           // FIXME: color: Theme.of(context).primaryText
-                          //           )
-                          //       .copyWith(letterSpacing: 0.0),
-                          //   elevation: 0.0,
-                          //   borderSide: BorderSide(
-                          //     color: Theme.of(context).alternate,
-                          //     width: 2.0,
-                          //   ),
-                          //   borderRadius: BorderRadius.circular(12.0),
-                          //   hoverColor: Theme.of(context).primaryBackground,
                           // ),
                         ),
                         // FIXME: https://supabase.com/docs/guides/auth/auth-anonymous
@@ -317,30 +272,6 @@ class _LoginPageState extends State<LoginPage> {
                             }
                           },
                           child: Text('Continue as Guest'),
-                          // options: FFButtonOptions(
-                          //   width: double.infinity,
-                          //   height: 44.0,
-                          //   padding: EdgeInsetsDirectional.fromSTEB(
-                          //       0.0, 0.0, 0.0, 0.0),
-                          //   iconPadding: EdgeInsetsDirectional.fromSTEB(
-                          //       0.0, 0.0, 0.0, 0.0),
-                          //   color: Theme.of(context).secondaryBackground,
-                          //   textStyle: Theme.of(context)
-                          //       .typography
-                          //       .white
-                          //       .titleSmall
-                          //       ?.apply(
-                          //         color: Theme.of(context).primaryText,
-                          //       )
-                          //       .copyWith(letterSpacing: 0.0),
-                          //   elevation: 0.0,
-                          //   borderSide: BorderSide(
-                          //     color: Theme.of(context).alternate,
-                          //     width: 2.0,
-                          //   ),
-                          //   borderRadius: BorderRadius.circular(12.0),
-                          //   hoverColor: Theme.of(context).primaryBackground,
-                          // ),
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.only(top: 8.0),
