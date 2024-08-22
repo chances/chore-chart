@@ -40,7 +40,7 @@ class ChoresApp extends StatelessWidget {
       ],
       // TODO: https://pub.dev/documentation/go_router/latest/topics/Transition%20animations-topic.html
       child: MaterialApp.router(
-        title: 'Chore Chart',
+        title: 'Chores',
         theme: ChoresTheme.instance.theme.copyWith(
           inputDecorationTheme: Theme.of(context).inputDecorationTheme.copyWith(
                 labelStyle:

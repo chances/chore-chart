@@ -171,15 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                             );
                           },
-                          child: Text(
-                            'Reset Password',
-                            style: Theme.of(context)
-                                .typography
-                                .white
-                                .bodyMedium
-                                ?.apply(color: Provider.of<AppTheme>(context).primary)
-                                .copyWith(letterSpacing: 0.0),
-                          ),
+                          child: Text('Reset Password', style: ChoresTheme.of(context).hyperlink),
                         ),
                         FilledButton(
                           onPressed: () async {
@@ -350,49 +342,9 @@ class _LoginPageState extends State<LoginPage> {
                           //   hoverColor: Theme.of(context).primaryBackground,
                           // ),
                         ),
-                        // You will have to add an action on this rich text to go to your login page.
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-                          child: RichText(
-                            textScaler: MediaQuery.of(context).textScaler,
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: 'Don\'t have an account?  ',
-                                  style: TextStyle(),
-                                ),
-                                TextSpan(
-                                  text: 'Sign Up',
-                                  style: Theme.of(context)
-                                      .typography
-                                      .white
-                                      .bodyMedium
-                                      ?.apply(
-                                          color:
-                                              Theme.of(context).typography.white.bodyMedium?.color)
-                                      .copyWith(
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                  mouseCursor: SystemMouseCursors.click,
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () async {
-                                      context.pushNamed(
-                                        '/signup',
-                                        extra: <String, dynamic>{
-                                          kTransitionInfo: PageTransitionType.rightToLeft,
-                                        },
-                                      );
-                                    },
-                                )
-                              ],
-                              style: Theme.of(context)
-                                  .typography
-                                  .white
-                                  .bodyMedium
-                                  ?.copyWith(letterSpacing: 0.0),
-                            ),
-                          ),
+                          padding: EdgeInsetsDirectional.only(top: 8.0),
+                          child: buildSignUp(context),
                         ),
                       ].divide(SizedBox(height: 16.0)),
                     ),
@@ -400,14 +352,11 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 // FIXME: Container.animateOnPageLoad(),
               ),
-              Container(
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-                  child: buildSignUp(context),
-                ),
+              Spacer(),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text('Copyright © 2024 Snow Developments, LLC.'),
               ),
-              // TODO: Add login form
-              Text('Copyright © 2024 Snow Developments, LLC.'),
             ],
           ),
         ),
@@ -423,15 +372,7 @@ class _LoginPageState extends State<LoginPage> {
           TextSpan(text: 'Don\'t have an account?  '),
           TextSpan(
             text: 'Sign Up',
-            style: Theme.of(context)
-                .typography
-                .dense
-                .bodyMedium
-                ?.apply(color: Theme.of(context).colorScheme.primary)
-                .copyWith(
-                  fontWeight: FontWeight.w600,
-                  letterSpacing: 0.0,
-                ),
+            style: ChoresTheme.of(context).hyperlink,
             mouseCursor: SystemMouseCursors.click,
             recognizer: TapGestureRecognizer()
               ..onTap = () async {
