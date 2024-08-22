@@ -1,6 +1,7 @@
 import 'package:chore_chart/navigation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:chore_chart/app.dart';
@@ -49,44 +50,40 @@ class _LoginPageState extends State<LoginPage> {
     final config = App.of(context);
 
     var orDivider = Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Expanded(
-                              child: Opacity(
-                                opacity: 0.75,
-                                child: Container(
-                                  height: 1.0,
-                                  decoration: BoxDecoration(
-                                    color: ChoresTheme.secondaryText,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                              child: Text(
-                                'or',
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .typography
-                                    .white
-                                    .labelLarge
-                                    ?.copyWith(letterSpacing: 0.0),
-                              ),
-                            ),
-                            Expanded(
-                              child: Opacity(
-                                opacity: 0.75,
-                                child: Container(
-                                  height: 1.0,
-                                  decoration: BoxDecoration(
-                                    color: ChoresTheme.secondaryText,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: Opacity(
+            opacity: 0.75,
+            child: Container(
+              height: 1.0,
+              decoration: BoxDecoration(
+                color: ChoresTheme.secondaryText,
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          child: Text(
+            'or',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).typography.white.labelLarge?.copyWith(letterSpacing: 0.0),
+          ),
+        ),
+        Expanded(
+          child: Opacity(
+            opacity: 0.75,
+            child: Container(
+              height: 1.0,
+              decoration: BoxDecoration(
+                color: ChoresTheme.secondaryText,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
     return Scaffold(
       body: Container(
         // FIXME: color: ChoresTheme.biceBlue,
@@ -227,7 +224,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         orDivider,
                         // See https://console.cloud.google.com/apis/credentials?authuser=1&project=chore-chart-fo3w11
-                        FilledButton(
+                        FilledButton.icon(
                           onPressed: () async {
                             setState(() => _loggingIn = true);
                             await Supabase.instance.client.auth.signInWithOAuth(
@@ -244,31 +241,34 @@ class _LoginPageState extends State<LoginPage> {
                                 .then((state) => state.session?.user);
                             if (user != null) context.pushReplacementNamed('/');
                           },
-                          child: Text('Login with Google'),
-                          // FIXME: icon: FaIcon(
-                          //   FontAwesomeIcons.google,
-                          //   size: 20.0,
-                          // ),
+                          icon: FaIcon(
+                            FontAwesomeIcons.google,
+                            size: 20,
+                          ),
+                          label: Text('Login with Google'),
                         ),
-                        // FIXME: https://supabase.com/docs/guides/auth/auth-anonymous
                         FilledButton(
                           onPressed: () async {
                             setState(() => _loggingIn = true);
-                            final user = await Supabase.instance.client.auth
-                                .signInAnonymously()
-                                .then((response) => response.user);
-                            if (user != null)
-                              context.pushReplacementNamed("/");
-                            else {
-                              setState(() => _loggingIn = false);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Could not login anonymously. Please try again or create an account.',
+                            try {
+                              // FIXME: https://supabase.com/docs/guides/auth/auth-anonymous
+                              final user = await Supabase.instance.client.auth
+                                  .signInAnonymously()
+                                  .then((response) => response.user);
+                              if (user != null)
+                                context.pushReplacementNamed("/");
+                              else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Could not login anonymously. Please try again or create an account.',
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
                                   ),
-                                  duration: Duration(milliseconds: 4000),
-                                ),
-                              );
+                                );
+                              }
+                            } finally {
+                              setState(() => _loggingIn = false);
                             }
                           },
                           child: Text('Continue as Guest'),
