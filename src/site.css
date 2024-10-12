@@ -1,0 +1,109 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  --night: #121619;
+  --darker-gray: #1d2428;
+  --dark-gray: #242424;
+  --bice-blue: #146996;
+  --orange-peel: #ffa739;
+  --mustard: #f9cf58;
+  --prussian-blue: #22334a;
+  --shamrock-green: #4c9f70;
+  --sky-blue: #5adbff;
+  --uranium-blue: #abd2fa;
+  --gray-blue: #688099;
+  --cadet-gray: #95a1ac;
+  --danger-color: #c93638;
+  --amethyst: #9f70c0;
+  --eggplant: #713e5a;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: var(--dark-gray);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+a {
+  font-weight: 500;
+  color: var(--sky-blue);
+  text-decoration: inherit;
+}
+a:hover {
+  color: var(--bice-blue);
+}
+
+/* Buttons */
+a.btn.btn-primary, button.btn.btn-primary {
+  --bs-btn-color: black;
+  --bs-btn-hover-color: black;
+  --bs-btn-active-color: var(--darker-gray);
+  --bs-btn-bg: var(--orange-peel);
+  --bs-btn-hover-bg: #ff930f;
+  --bs-btn-active-bg: #ff930f;
+  --bs-btn-border-color: var(--orange-peel);
+  --bs-btn-hover-border-color: #ff930f;
+  --bs-btn-active-border-color: #ff930f;
+}
+button, a.btn.btn-secondary, button.btn.btn-secondary {
+  color: white;
+  --bs-btn-bg: var(--prussian-blue);
+  --bs-btn-border-color: var(--prussian-blue);
+}
+
+@media (prefers-color-scheme: light) {
+  :root, body {
+    color: #213547;
+    background-color: white;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-color: #1d2428;
+  }
+  :root, body {
+    color: white;
+    background-color: #121619;
+  }
+  a:hover {
+    color: var(--gray-blue);
+  }
+  .navbar, .nav-link {
+    color: var(--uranium-blue);
+  }
+  .navbar {
+    background-color: #1d2428;
+  }
+  .navbar-brand {
+    color: white;
+  }
+  a:hover, a.nav-link.active, a.nav-link:hover, a.nav-link:focus {
+    color: white;
+  }
+  a.navbar-brand:hover {
+    color: var(--gray-blue);
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "actions" : {
+    "clean" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\nexport PATH=\"$PATH:$HOME\/bin\/flutter\/bin\"\nflutter clean\n"
+    },
+    "run" : {
+      "enabled" : true,
+      "script" : "#!\/bin\/sh\nexport FLUTTER_ROOT=\"$(asdf where flutter)\"\nexport CXX=\/usr\/lib\/llvm-6.0\/bin\/clang\nexport PATH=\"$PATH:$FLUTTER_ROOT\/bin\"\nflutter devices\necho\nflutter run --no-hot -d macos\n"
+    }
+  },
+  "openLogOnRun" : "fail"
+}

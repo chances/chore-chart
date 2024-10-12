@@ -1,0 +1,37 @@
+# Environment
+*.env
+!example.env
+
+# Temporary Files
+*.*~
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Miscellaneous
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+
+# Web
+node_modules
+dist
+dist-ssr
+*.local
+
+# Symbolication
+app.*.symbols
+
+# Obfuscation
+app.*.map.json
