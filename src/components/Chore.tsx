@@ -1,7 +1,7 @@
 import { createAsyncStore, useLocation, useParams } from "@solidjs/router";
 import { assert } from "@std/assert";
 import { } from "@std/async";
-import { Accessor, createSignal, Setter, Show } from "solid-js";
+import { Accessor, createSignal, onMount, Setter, Show } from "solid-js";
 
 import * as models from "../models";
 import { Frequency, frequencies, newChore, unnamedChore } from "../models";
@@ -51,7 +51,8 @@ export function CreateChoreForm(props: { chore: Accessor<models.Chore | null> })
   let form: HTMLFormElement | undefined;
   let actions: HTMLElement | undefined;
   let submit: HTMLButtonElement | undefined;
-  // onMount(() => form?.classList.add("was-validated"));
+  // Autofocus first form input
+  onMount(() => (form?.querySelector("[autofocus]") as HTMLElement | null)?.focus());
 
   return <form ref={el => form = el}>
     <Input name="Name" required value={name} onChange={setName} autofocus placeholder="Sweep the kitchen" />
