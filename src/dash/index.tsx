@@ -1,7 +1,7 @@
 /* @refresh reload */
 import { delay } from "@std/async/delay";
-import { render } from 'solid-js/web'
-
+import { render } from "solid-js/web";
+import { Router } from "@solidjs/router";
 
 import Dashboard from './Dashboard'
 
@@ -15,9 +15,8 @@ function bootstrap() {
   render(() => <>
     <Header />
     <main class="container">
-      <Dashboard />
+      <Router root={Dashboard} />
     </main>
-    <Footer />
   </>, root);
 }
 
@@ -57,33 +56,4 @@ export function Header() {
 
 export function Upgrade() {
   return <a href="/#pricing" class="btn btn-primary" title="Upgrade to enjoy enhanced features">Upgrade</a>;
-}
-
-export function Footer() {
-  return <footer>
-    <nav class="navbar navbar-expand pe-2">
-      <a href="/" class="navbar-brand">
-        <img src="calendar-48.png" alt="Chore Chart" />
-      </a>
-      <ul class="navbar-nav collapse navbar-collapse">
-        <li class="nav-item">
-          <a href="/#features" class="nav-link">Features</a>
-        </li>
-        <li class="nav-item">
-          <a href="/#pricing" class="nav-link">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a href="/blog" class="nav-link">Blog</a>
-        </li>
-        <li class="nav-item">
-          <a href="/help" class="nav-link">Help</a>
-        </li>
-      </ul>
-      <ul class="actions navbar-nav">
-        <li class="nav-item ps-2">
-          <Upgrade />
-        </li>
-      </ul>
-    </nav>
-  </footer>;
 }
