@@ -50,6 +50,9 @@ a:hover {
 }
 
 /* Buttons */
+a.btn-circular, button.btn-circular {
+  border-radius: 50%;
+}
 a.btn.btn-primary, button.btn.btn-primary {
   --bs-btn-color: black;
   --bs-btn-hover-color: black;
@@ -80,6 +83,7 @@ button, a.btn.btn-secondary, button.btn.btn-secondary {
 @media (prefers-color-scheme: dark) {
   :root {
     --surface-color: #1d2428;
+    --bs-secondary-color: var(--cadet-gray);
   }
   :root, body {
     color: white;

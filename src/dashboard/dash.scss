@@ -32,8 +32,19 @@ h1 {
       margin-block-end: 0;
     }
   }
+
+  & ~ * {
+    margin-block-start: 1rem;
+  }
 }
 
-.read-the-docs {
-  color: #888;
+form div.input {
+  &:not(:has(.form-text:last-child)) {
+    margin-block-end: 0.75rem;
+  }
+
+  * ~ p.form-text {
+    margin-block-start: 0.5rem;
+    margin-block-end: 0rem;
+  }
 }

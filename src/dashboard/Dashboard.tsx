@@ -1,8 +1,10 @@
 import { createSignal } from "solid-js";
 import Icon from "../components/Icon";
 
+// TODO: https://supabase.com/docs/reference/javascript/initializing
+
 export default function Dashboard() {
-  const [count, setCount] = createSignal(0)
+  const [count, setCount] = createSignal(0);
 
   return (
     <>
@@ -25,6 +27,6 @@ export function NoChores() {
     <Icon icon="broom" />
     <h2>No Chores</h2>
     <p>Cleanup your act and schedule a chore.</p>
-    <button class="btn btn-secondary" type="button">Plan a Chore</button>
+    <a href="/chore/new" class="btn btn-secondary" type="button">Plan a Chore</a>
   </div>
 }

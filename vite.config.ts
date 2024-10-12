@@ -10,7 +10,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: path.join(__dirname, "src", "index.html"),
-        dash: path.join(__dirname, "src", "dash", "index.html"),
+        dashboard: path.join(__dirname, "src", "dashboard", "index.html"),
       },
     },
   },

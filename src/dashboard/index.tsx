@@ -1,22 +1,47 @@
 /* @refresh reload */
 import { delay } from "@std/async/delay";
+import { lazy, JSX } from "solid-js";
 import { render } from "solid-js/web";
-import { Router } from "@solidjs/router";
+import { Route, RouteSectionProps, Router } from "@solidjs/router";
 
-import Dashboard from './Dashboard'
+const Dashboard = lazy(() => import("./Dashboard"));
+const Chore = lazy(() => import("../components/Chore"));
 
 const root = document.body;
 root.querySelectorAll(".spinner-border").forEach(el => el.classList.add("fade"));
 
 await delay(250).then(bootstrap);
 
+function Page(props: RouteSectionProps & JSX.HTMLAttributes<HTMLElement>) {
+  const { location } = props;
+
+  return <>
+    <main class="container">
+      {props.children}
+    </main>
+    <footer>
+      <p>{location.pathname}{location.hash}</p>
+      <ul>
+        {Object.keys(location.query).map(q => <li>{q.toString()}</li>)}
+      </ul>
+    </footer>
+  </>;
+}
+
 function bootstrap() {
   removeChildren(root);
   render(() => <>
     <Header />
-    <main class="container">
-      <Router root={Dashboard} />
-    </main>
+    <Router root={Page}>
+      <Route path="/dashboard/:section?" component={Dashboard} />
+      <Route path="/chore/:id" component={Chore} />
+      <Route path="/login" component={Dashboard} />
+      <Route path="/*" component={function gotoWebsite(props: RouteSectionProps) {
+        const { pathname, hash } = props.location;
+        window.location.replace(`${pathname}${hash}`);
+        return <></>;
+      }} />
+    </Router>
   </>, root);
 }
 
@@ -33,10 +58,10 @@ export function Header() {
       </a>
       <ul class="navbar-nav collapse navbar-collapse">
         <li class="nav-item">
-          <a href="#features" class="nav-link">Dashboard</a>
+          <a href="/dashboard" class="nav-link">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a href="#pricing" class="nav-link">Chores</a>
+          <a href="/chore/list" class="nav-link">Chores</a>
         </li>
         <li class="nav-item">
           <a href="/help" class="nav-link" target="_blank">Help</a>
