@@ -5,8 +5,9 @@ import { Accessor, createSignal, onMount, Show } from "solid-js";
 
 import * as models from "../models";
 import { Frequency, frequencies, newChore, unnamedChore } from "../models";
-import Icon from "../components/Icon";
-import Input from "../components/Input";
+import Icon from "./Icon";
+import Input from "./Input";
+import NoChores from "./NoChores";
 
 // TODO: https://supabase.com/docs/reference/javascript/initializing
 
@@ -26,6 +27,7 @@ export default function Chore() {
       <h1>{isNew ? "Plan a Chore" : (title ?? chore()?.name ?? unnamedChore)}</h1>
     </div>
     <Show when={isNew}><CreateChoreForm chore={chore} /></Show>
+    <Show when={!isNew}><NoChores /></Show>
   </>;
 }
 
