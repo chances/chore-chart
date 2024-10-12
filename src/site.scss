@@ -92,7 +92,7 @@ button, a.btn.btn-secondary, button.btn.btn-secondary {
     color: var(--uranium-blue);
   }
   .navbar {
-    background-color: #1d2428;
+    background-color: var(--surface-color);
   }
   .navbar-brand {
     color: white;
@@ -105,5 +105,31 @@ button, a.btn.btn-secondary, button.btn.btn-secondary {
   }
   button {
     background-color: #f9f9f9;
+  }
+  .card {
+    --bs-body-color: white;
+    --bs-card-bg: var(--surface-color);
+
+    button, a.btn.btn-secondary, button.btn.btn-secondary {
+      --bs-btn-focus-shadow-rgb: 49, 132, 253;
+      --bs-btn-focus-box-shadow: 0 0 0 0.25rem rgba(var(--bs-btn-focus-shadow-rgb), .5);
+      $hover: lighten(#22334a, 5%);
+
+      color: var(--bs-btn-color);
+      --bs-btn-color: white;
+      --bs-btn-hover-color: white;
+      --bs-btn-active-color: white;
+      --bs-btn-bg: var(--prussian-blue);
+      --bs-btn-hover-bg: #{$hover};
+      --bs-btn-active-bg: var(--prussian-blue);
+      --bs-btn-border-color: var(--prussian-blue);
+      --bs-btn-hover-border-color: #{$hover};
+      --bs-btn-active-border-color: var(--prussian-blue);
+
+      &:focus-visible {
+        outline: 0;
+        box-shadow: var(--bs-btn-focus-box-shadow);
+      }
+    }
   }
 }

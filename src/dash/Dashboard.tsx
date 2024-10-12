@@ -7,9 +7,9 @@ export default function Dashboard() {
   return (
     <>
       <NoChores />
-      <h1>Overview</h1>
+      <h1 class="fs-2">Overview</h1>
       <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button class="btn" onClick={() => setCount((count) => count + 1)}>
           Count is: {count()}
         </button>
         <p>
@@ -21,7 +21,7 @@ export default function Dashboard() {
 }
 
 export function NoChores() {
-  return <div class="container text-align-center">
+  return <div class="empty text-center">
     <Icon icon="broom" />
     <h2>No Chores</h2>
     <p>Cleanup your act and schedule a chore.</p>

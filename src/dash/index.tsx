@@ -14,7 +14,7 @@ function bootstrap() {
   removeChildren(root);
   render(() => <>
     <Header />
-    <main>
+    <main class="container">
       <Dashboard />
     </main>
     <Footer />

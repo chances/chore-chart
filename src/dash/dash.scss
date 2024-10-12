@@ -1,13 +1,14 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+main {
+  margin-block-start: 1rem;
 }
 
-img.icon {
-  height: 6em;
-  padding: 1.5em;
+h1 {
+  margin-block: 1rem;
+}
+
+.empty i.icon {
+  font-size: 4.5rem;
+  padding: 1rem;
   will-change: filter;
   transition: filter 300ms;
 
@@ -21,7 +22,16 @@ img.icon {
 }
 
 .card {
-  padding: 2em;
+  padding-block: 1.75rem;
+  padding-inline: 1.5rem;
+
+  button ~ p {
+    margin-block-start: 0.75rem;
+
+    &:last-child {
+      margin-block-end: 0;
+    }
+  }
 }
 
 .read-the-docs {
