@@ -5,6 +5,7 @@ import { render } from "solid-js/web";
 import { Route, RouteSectionProps, Router } from "@solidjs/router";
 
 const Dashboard = lazy(() => import("./Dashboard"));
+const Login = lazy(() => import("../components/Login"));
 const Chore = lazy(() => import("../components/Chore"));
 
 const root = document.body;
@@ -35,7 +36,8 @@ function bootstrap() {
     <Router root={Page}>
       <Route path="/dashboard/:section?" component={Dashboard} />
       <Route path="/chore/:id" component={Chore} />
-      <Route path="/login" component={Dashboard} />
+      <Route path="/login" component={Login} />
+      <Route path="/signup" component={Login} />
       <Route path="/*" component={function gotoWebsite(props: RouteSectionProps) {
         const { pathname, hash } = props.location;
         window.location.replace(`${pathname}${hash}`);
@@ -58,7 +60,7 @@ export function Header() {
       </a>
       <ul class="navbar-nav collapse navbar-collapse">
         <li class="nav-item">
-          <a href="/dashboard" class="nav-link">Dashboard</a>
+          <a href="/dashboard/" class="nav-link">Dashboard</a>
         </li>
         <li class="nav-item">
           <a href="/chore/list" class="nav-link">Chores</a>

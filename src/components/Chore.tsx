@@ -1,11 +1,12 @@
 import { createAsyncStore, useLocation, useParams } from "@solidjs/router";
 import { assert } from "@std/assert";
 import { } from "@std/async";
-import { Accessor, createSignal, onMount, Setter, Show } from "solid-js";
+import { Accessor, createSignal, onMount, Show } from "solid-js";
 
 import * as models from "../models";
 import { Frequency, frequencies, newChore, unnamedChore } from "../models";
 import Icon from "../components/Icon";
+import Input from "../components/Input";
 
 // TODO: https://supabase.com/docs/reference/javascript/initializing
 
@@ -54,7 +55,25 @@ export function CreateChoreForm(props: { chore: Accessor<models.Chore | null> })
   // Autofocus first form input
   onMount(() => (form?.querySelector("[autofocus]") as HTMLElement | null)?.focus());
 
-  return <form ref={el => form = el}>
+  return <form ref={el => form = el} onSubmit={(ev) => {
+      const isFormInvalid = !form?.checkValidity();
+
+      ev.preventDefault();
+      form?.classList.add("was-validated");
+      Array.from(actions?.querySelectorAll(".invalid-feedback") ?? []).forEach(el => el.classList.remove("d-inline"));
+      if (isFormInvalid) {
+        // TODO: Re-enable submit button when form is `:valid`
+        submit?.setAttribute("disabled", "");
+        Array.from(form?.elements ?? [])
+        Array.from(actions?.querySelectorAll(".invalid-feedback") ?? []).forEach(el => el.classList.add("d-inline"));
+        (form?.querySelector("input:invalid, select:invalid, textarea:invalid") as HTMLElement | null)?.focus();
+        return;
+      }
+
+      const payload = JSON.parse(JSON.stringify(chore!));
+      payload.updated = new Date();
+      console.log(payload);
+    }}>
     <Input name="Name" required value={name} onChange={setName} autofocus placeholder="Sweep the kitchen" />
     <div class="mb-3 row">
       <label for="frequency" class="col-sm-3 col-form-label">Frequency</label>
@@ -85,66 +104,7 @@ export function CreateChoreForm(props: { chore: Accessor<models.Chore | null> })
         submit?.removeAttribute("disabled");
         Array.from(actions?.querySelectorAll(".invalid-feedback") ?? []).forEach(el => el.classList.remove("d-inline"));
       }}>Reset</button>
-      <button type="submit" class="btn btn-success col-auto" ref={submit} onClick={(ev) => {
-        const isFormInvalid = !form?.checkValidity();
-
-        ev.preventDefault();
-        form?.classList.add("was-validated");
-        Array.from(actions?.querySelectorAll(".invalid-feedback") ?? []).forEach(el => el.classList.remove("d-inline"));
-        if (isFormInvalid) {
-          // TODO: Re-enable submit button when form is `:valid`
-          submit?.setAttribute("disabled", "");
-          Array.from(form?.elements ?? [])
-          Array.from(actions?.querySelectorAll(".invalid-feedback") ?? []).forEach(el => el.classList.add("d-inline"));
-          (form?.querySelector("input:invalid, select:invalid, textarea:invalid") as HTMLElement | null)?.focus();
-          return;
-        }
-
-        const payload = JSON.parse(JSON.stringify(chore!));
-        payload.updated = new Date();
-        console.log(payload);
-      }}>Save</button>
+      <button type="submit" class="btn btn-success col-auto" ref={submit}>Save</button>
     </div>
   </form>;
-}
-
-interface InputOptions {
-  type?: string;
-  small?: boolean;
-  required?: boolean;
-  autofocus?: boolean;
-  placeholder?: string;
-  onChange?: Setter<string>;
-}
-
-const defaultAccessor = (() => "") as Accessor<string>;
-
-function Input({name, value, ...options}: {name: string, value?: Accessor<string | null>, onChange?: Setter<string>} & InputOptions) {
-  return makeInput(
-    name,
-    value ? () => (value() ?? "") : defaultAccessor,
-    options,
-  );
-}
-
-function makeInput(name: string, value: Accessor<string | null>, options?: InputOptions) {
-  const isRequired = options?.required ?? false;
-
-  return <div class="mb-3 row">
-    <label for={name.toLowerCase()} class="col-sm-3 col-form-label">{name}{isRequired ? "*" : null}</label>
-    <div class="input col-sm-9">
-      <input classList={({ "form-control": true, "form-control-sm": options?.small ?? false })}
-        id={name.toLowerCase()}
-        type={options?.type ?? "text"}
-        minLength={3}
-        autofocus={options?.autofocus ?? false}
-        required={isRequired}
-        placeholder={options?.placeholder ?? ""}
-        value={value() ?? ""}
-        onChange={(e) => {
-          if (options?.onChange) options?.onChange(e.target.value);
-        }}
-      />
-    </div>
-  </div>;
 }
