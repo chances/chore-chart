@@ -1,10 +1,10 @@
 import { createAsyncStore, useLocation, useParams } from "@solidjs/router";
 import { assert } from "@std/assert";
 import { } from "@std/async";
-import { Accessor, createSignal, onMount, Setter, Show } from "solid-js";
+import { Accessor, createSignal, Setter, Show } from "solid-js";
 
 import * as models from "../models";
-import { Frequency, frequencies, newChore } from "../models";
+import { Frequency, frequencies, newChore, unnamedChore } from "../models";
 import Icon from "../components/Icon";
 
 // TODO: https://supabase.com/docs/reference/javascript/initializing
@@ -14,6 +14,7 @@ export default function Chore() {
   assert(search.length >= 0);
   const { id } = useParams<{ id: string }>();
   const isNew = id === "new";
+  const title = id === "list" ? "Chores" : null;
   const [chore] = loadChore(isNew ? null : id);
 
   return <>
@@ -21,7 +22,7 @@ export default function Chore() {
       <div class="col-3">
         <a href="#" class="btn btn-circular btn-dark btn-outline-secondary" title="Go Back" onClick={() => window.history.back()}><Icon icon="chevron-left" /></a>
       </div>
-      <h1>{chore()?.name ?? "Plan a Chore"}</h1>
+      <h1>{isNew ? "Plan a Chore" : (title ?? chore()?.name ?? unnamedChore)}</h1>
     </div>
     <Show when={isNew}><CreateChoreForm chore={chore} /></Show>
   </>;
