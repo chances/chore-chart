@@ -1,4 +1,5 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from "@supabase/supabase-js";
+import { Maybe } from "monet";
 
 import { Database, PublicSchema, Tables } from "./db";
 
@@ -44,21 +45,21 @@ export class User implements Model {
 export class Chore implements Model {
   static unnamed = "Unnamed Chore";
 
-  id: number | string | null;
+  id: Maybe<number | string>;
   createdBy: string;
   created: Date;
   updated: Date;
-  name?: string;
+  name: Maybe<string> = Maybe.none();
   frequency: number;
   completed: boolean;
-  completedBy?: string;
-  assignee?: string;
+  completedBy: Maybe<string> = Maybe.none();
+  assignee: Maybe<string> = Maybe.none();
   notes: string;
 
   readonly tableName = "chores";
 
   constructor (creator: string) {
-    this.id = null;
+    this.id = Maybe.none();
     this.frequency = Frequency.never;
     this.createdBy = creator;
     this.created = new Date();
@@ -98,19 +99,19 @@ export class Frequency implements Model {
   static yearly = 11;
 
   id: number;
-  frequency: number | null;
+  frequency: Maybe<number>;
   created: Date;
   title: string;
-  description: string | null;
+  description: Maybe<string>;
 
   readonly tableName = "frequencies";
 
   constructor (frequency: Tables<"frequencies">) {
     this.id = frequency.id;
-    this.frequency = frequency.frequency;
+    this.frequency = Maybe.fromNull(frequency.frequency);
     this.created = new Date(frequency.created_at);
     this.title = frequency.title;
-    this.description = frequency.description;
+    this.description = Maybe.fromNull(frequency.description);
   }
 
   toJson() {
