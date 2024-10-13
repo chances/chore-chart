@@ -1,30 +1,124 @@
-/** @enum */
-export const Frequency = {
-  never: 0,
+import { createClient } from '@supabase/supabase-js'
+
+import { Database, PublicSchema, Tables } from "./db";
+
+declare global {
+  const env: {
+    SUPABASE_URL: string
+    SUPABASE_ANON_KEY: string
+  };
+}
+
+const supabase = createClient<Database>(env.SUPABASE_URL, env.SUPABASE_ANON_KEY, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true,
+    storageKey: "dbSession"
+  }
+});
+
+export interface Model {
+  tableName: string;
+  toJson(): any;
+}
+
+export class User implements Model {
+  id: string;
+  guest: boolean;
+  created: Date;
+
+  readonly tableName = "users";
+
+  constructor (user: Tables<"users">) {
+    this.id = user.id;
+    this.guest = user.guest;
+    this.created = new Date(user.created_at);
+  }
+
+  toJson() {
+    return toJson<"users">(this);
+  }
+}
+
+export class Chore implements Model {
+  static unnamed = "Unnamed Chore";
+
+  id: number | string | null;
+  createdBy: string;
+  created: Date;
+  updated: Date;
+  name?: string;
+  frequency: number;
+  completed: boolean;
+  completedBy?: string;
+  assignee?: string;
+  notes: string;
+
+  readonly tableName = "chores";
+
+  constructor (creator: string) {
+    this.id = null;
+    this.frequency = Frequency.never;
+    this.createdBy = creator;
+    this.created = new Date();
+    this.updated = new Date();
+    this.completed = false;
+    this.notes = "";
+  }
+
+  toJson() {
+    return toJson<"chores">(this);
+  }
+}
+
+export class Frequency implements Model {
+  static never = 0;
   /** Every day. */
-  daily: 1,
+  static daily = 1;
   /** Twice a week. */
-  biWeekly: 2,
+  static biWeekly = 2;
   /** Every week. */
-  weekly: 3,
+  static weekly = 3;
   /** Twice a month. */
-  biMonthly: 4,
+  static biMonthly = 4;
   /** Every month. */
-  monthly: 5,
+  static monthly = 5;
   /** Four times a year. */
-  quarterly: 6,
+  static quarterly = 6;
   /** Once every spring. */
-  spring: 7,
+  static spring = 7;
   /** Once every summer. */
-  summer: 8,
+  static summer = 8;
   /** Once every winter. */
-  winter: 9,
+  static winter = 9;
   /** Once every fall. */
-  fall: 10,
+  static fall = 10;
   /** Once a year. */
-  yearly: 11,
+  static yearly = 11;
+
+  id: number;
+  frequency: number | null;
+  created: Date;
+  title: string;
+  description: string | null;
+
+  readonly tableName = "frequencies";
+
+  constructor (frequency: Tables<"frequencies">) {
+    this.id = frequency.id;
+    this.frequency = frequency.frequency;
+    this.created = new Date(frequency.created_at);
+    this.title = frequency.title;
+    this.description = frequency.description;
+  }
+
+  toJson() {
+    return toJson<"frequencies">(this);
+  }
+
   /** @returns Name of the given `frequency`. */
-  nameOf(frequency: number) {
+  static nameOf(frequency: number) {
     switch (frequency) {
       case Frequency.daily:  return "Daily";
       case Frequency.biWeekly:  return "Twice Weekly";
@@ -39,9 +133,10 @@ export const Frequency = {
       case Frequency.yearly: return "Yearly";
       default: throw new Error(`Unknown frequency \`${this}\``);
     }
-  },
+  };
+
   /** @returns An accessible label for the given `frequency`. */
-  labelOf(frequency: number) {
+  static labelOf(frequency: number) {
     switch (frequency) {
       case Frequency.daily:  return "Once a day";
       case Frequency.biWeekly:  return "Twice a week";
@@ -56,9 +151,10 @@ export const Frequency = {
       case Frequency.yearly: return "Once a year";
       default: throw new Error(`Unknown frequency \`${this}\``);
     }
-  },
+  }
+
   /** Convert the given `frequency` to its equivalent measure in days. */
-  inDays(frequency: number) {
+  static inDays(frequency: number) {
     switch (frequency) {
       case Frequency.daily: return 1;
       case Frequency.biWeekly: return 3.5;
@@ -92,29 +188,20 @@ export const frequencies = [
   Frequency.yearly,
 ];
 
-export const unnamedChore = "Unnamed Chore";
+type TableNames = keyof (PublicSchema["Tables"] & PublicSchema["Views"]);
 
-export interface Chore {
-  id: string | null;
-  createdBy: string;
-  created: Date;
-  updated: Date;
-  name?: string;
-  frequency: number,
-  completed: boolean;
-  completedBy?: string;
-  assignee?: string;
-  notes: string;
+function toJson<T extends TableNames>(model: Chore | User | Frequency): Tables<T> {
+  const record = model as unknown as Record<string, any>;
+  return Object.keys(model)
+    .filter(key => typeof record[key] !== "function")
+    .reduce((result, key) => {
+      const value = record[key] instanceof Date ? record[key].toISOString() : record[key];
+      const isTimestamp = key === "created" || key === "updated";
+
+      key = isTimestamp ? `${key}_at` : key ;
+      return ({
+        ...result,
+        [key]: value,
+      });
+    }, {} as unknown as Tables<T>);
 }
-
-export function newChore(creator: string): Chore {
-  return {
-    id: null,
-    frequency: Frequency.never,
-    createdBy: creator,
-    created: new Date(),
-    updated: new Date(),
-    completed: false,
-    notes: ""
-  };
-};

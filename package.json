@@ -14,10 +14,12 @@
     "@solidjs/router": "^0.14.8",
     "@std/assert": "npm:@jsr/std__assert@^1.0.6",
     "@std/async": "npm:@jsr/std__async@^1.0.6",
+    "@supabase/supabase-js": "npm:@jsr/supabase__supabase-js@^2.45.4",
     "bootstrap": "^5.3.3",
     "solid-js": "^1.9.1"
   },
   "devDependencies": {
+    "@std/dotenv": "npm:@jsr/std__dotenv@^0.225.2",
     "@std/path": "npm:@jsr/std__path@^1",
     "sass": "^1.79.5",
     "typescript": "^5.5.3",
