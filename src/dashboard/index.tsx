@@ -1,8 +1,8 @@
 /* @refresh reload */
+import { Route, RouteSectionProps, Router, useParams } from "@solidjs/router";
 import { delay } from "@std/async/delay";
-import { lazy, JSX } from "solid-js";
+import { JSX, Show, lazy } from "solid-js";
 import { render } from "solid-js/web";
-import { Route, RouteSectionProps, Router } from "@solidjs/router";
 
 const Dashboard = lazy(() => import("./Dashboard"));
 const Login = lazy(() => import("../components/Login"));
@@ -35,14 +35,17 @@ function bootstrap() {
     <Header />
     <Router root={Page}>
       <Route path="/dashboard/:section?" component={Dashboard} />
-      <Route path="/chore/:id" component={Chore} />
+      <Route path="/chore/:id" component={() => {
+        const params = useParams();
+        return <Show when={params.id} keyed><Chore /></Show>;
+      } } />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Login} />
       <Route path="/*" component={function gotoWebsite(props: RouteSectionProps) {
         const { pathname, hash } = props.location;
         window.location.replace(`${pathname}${hash}`);
         return <></>;
-      }} />
+      } } />
     </Router>
   </>, root);
 }
