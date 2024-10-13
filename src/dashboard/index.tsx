@@ -56,7 +56,7 @@ function removeChildren(node: Node) {
 
 export function Header() {
   return <header>
-    <nav class="navbar navbar-expand pe-2">
+    <nav class="navbar navbar-expand px-2">
       <a href="/" class="navbar-brand">
         <img src="calendar-48.png" alt="" />
         <span class="label">Chore Chart</span>
